@@ -8,6 +8,8 @@ services:
     envVars:
       - key: DATABASE_URL
         sync: false
+      - key: NODE_ENV
+        value: production
       - key: JWT_SECRET
         sync: false
       - key: ADMIN_PASSWORD

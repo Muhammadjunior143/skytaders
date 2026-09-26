@@ -13,6 +13,11 @@ const app = express();
 const port = Number(process.env.PORT || 10000);
 const root = path.dirname(fileURLToPath(import.meta.url));
 const localDatabase = process.env.DATABASE_URL ? null : newDb();
+const production = process.env.NODE_ENV === 'production' || process.env.RENDER === 'true';
+if (production && !process.env.DATABASE_URL) throw new Error('DATABASE_URL is required in production. Configure PostgreSQL before accepting users.');
+if (production && (!process.env.JWT_SECRET || process.env.JWT_SECRET.length < 32)) throw new Error('A JWT_SECRET of at least 32 characters is required in production.');
+if (production && (!process.env.STRIPE_SECRET_KEY || !process.env.STRIPE_WEBHOOK_SECRET || !process.env.STRIPE_STARTER_PRICE_ID || !process.env.STRIPE_PROFESSIONAL_PRICE_ID)) throw new Error('Stripe secret, webhook, and recurring price IDs are required in production.');
+if (production && (!process.env.ADMIN_PASSWORD || process.env.ADMIN_PASSWORD.length < 12 || process.env.ADMIN_PASSWORD === '1562')) throw new Error('Set a strong ADMIN_PASSWORD of at least 12 characters in production.');
 const pool = localDatabase
   ? new (localDatabase.adapters.createPg().Pool)()
   : new Pool({ connectionString: process.env.DATABASE_URL, ssl: { rejectUnauthorized: false } });
