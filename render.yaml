@@ -1,0 +1,24 @@
+services:
+  - type: web
+    name: skytraders
+    env: node
+    plan: free
+    buildCommand: npm install
+    startCommand: node server.js
+    envVars:
+      - key: DATABASE_URL
+        sync: false
+      - key: JWT_SECRET
+        sync: false
+      - key: ADMIN_PASSWORD
+        sync: false
+      - key: STRIPE_SECRET_KEY
+        sync: false
+      - key: STRIPE_WEBHOOK_SECRET
+        sync: false
+      - key: STRIPE_STARTER_PRICE_ID
+        sync: false
+      - key: STRIPE_PROFESSIONAL_PRICE_ID
+        sync: false
+      - key: MT5_STATUS_URL
+        sync: false

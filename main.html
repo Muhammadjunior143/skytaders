@@ -1,0 +1,740 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SKY TRADERS — Professional Forex Trading Platform</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        navy: {
+                            900: '#0a0f1d',
+                            950: '#05070e',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        @keyframes progress {
+            0% { width: 0%; }
+            100% { width: 100%; }
+        }
+        .animate-progress {
+            animation: progress 5s linear forwards;
+        }
+        .glass {
+            background: rgba(15, 23, 42, 0.75);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+    </style>
+</head>
+<body class="bg-slate-950 text-slate-100 font-sans antialiased min-h-screen selection:bg-cyan-500 selection:text-slate-950">
+
+    <!-- 1. 5-SECOND SPLASH INTRO SCREEN -->
+    <div id="splash-screen" class="fixed inset-0 z-50 bg-slate-950 flex flex-col items-center justify-center text-white p-4">
+        <div class="absolute w-96 h-96 bg-cyan-500/10 rounded-full blur-3xl animate-pulse"></div>
+        <div class="absolute w-96 h-96 bg-blue-600/10 rounded-full blur-3xl animate-pulse delay-700"></div>
+
+        <div class="z-10 text-center space-y-6 max-w-md w-full">
+            <div class="flex items-center justify-center space-x-3">
+                <i data-lucide="trending-up" class="w-12 h-12 text-cyan-400 animate-bounce"></i>
+                <h1 class="text-4xl font-black tracking-widest bg-gradient-to-r from-cyan-400 via-blue-500 to-indigo-500 bg-clip-text text-transparent">
+                    SKY TRADERS
+                </h1>
+            </div>
+            <p class="text-slate-400 text-xs tracking-widest uppercase font-medium">
+                Initializing Quantitative Algorithmic Execution System...
+            </p>
+            <div class="w-full bg-slate-800 h-1.5 rounded-full overflow-hidden">
+                <div class="h-full bg-gradient-to-r from-cyan-500 to-blue-600 animate-progress"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 2. SUBSCRIPTION MODULE -->
+    <div id="subscription-screen" class="hidden min-h-screen p-4 md:p-8">
+        <div class="max-w-6xl mx-auto">
+            <div class="flex items-center justify-between mb-10">
+                <div>
+                    <div class="flex items-center space-x-2 mb-2">
+                        <i data-lucide="trending-up" class="w-7 h-7 text-cyan-400"></i>
+                        <span class="text-xl font-black tracking-wider">SKY TRADERS</span>
+                    </div>
+                    <p class="text-slate-400 text-sm">Choose your trading access before creating an account.</p>
+                </div>
+                <span class="hidden sm:inline-flex items-center gap-2 text-xs text-emerald-400 border border-emerald-500/30 bg-emerald-500/10 px-3 py-2 rounded-lg">
+                    <i data-lucide="shield-check" class="w-4 h-4"></i> Secure checkout
+                </span>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 max-w-4xl mx-auto">
+                <article class="bg-slate-900/80 border border-slate-700 rounded-2xl p-7 flex flex-col">
+                    <div class="flex items-start justify-between">
+                        <div>
+                            <p class="text-cyan-400 text-xs font-bold tracking-[0.2em] uppercase">Starter</p>
+                            <h2 class="text-3xl font-black mt-2">$5<span class="text-base text-slate-400 font-normal"> / month</span></h2>
+                        </div>
+                        <i data-lucide="zap" class="w-7 h-7 text-cyan-400"></i>
+                    </div>
+                    <p class="text-slate-400 text-sm mt-5">A focused workspace for learning the Sky Traders execution flow.</p>
+                    <ul class="space-y-3 text-sm text-slate-300 mt-6 mb-8">
+                        <li class="flex gap-2"><i data-lucide="check" class="w-4 h-4 text-emerald-400"></i> Live simulated forex quotes</li>
+                        <li class="flex gap-2"><i data-lucide="check" class="w-4 h-4 text-emerald-400"></i> Manual and automated trades</li>
+                        <li class="flex gap-2"><i data-lucide="check" class="w-4 h-4 text-emerald-400"></i> Seven-day free trial</li>
+                    </ul>
+                    <button onclick="selectSubscription('starter-trial')" class="mt-auto w-full py-3 bg-cyan-500 hover:bg-cyan-400 text-slate-950 rounded-lg font-bold text-sm transition">Start 7-Day Free Trial</button>
+                </article>
+
+                <article class="bg-slate-900/80 border border-blue-500/50 rounded-2xl p-7 flex flex-col relative overflow-hidden">
+                    <div class="absolute top-0 right-0 bg-blue-500 text-white text-[10px] font-bold px-4 py-1 rounded-bl-lg tracking-widest">PRO ACCESS</div>
+                    <div class="flex items-start justify-between">
+                        <div>
+                            <p class="text-blue-400 text-xs font-bold tracking-[0.2em] uppercase">Professional</p>
+                            <h2 class="text-3xl font-black mt-2">$20<span class="text-base text-slate-400 font-normal"> / month</span></h2>
+                        </div>
+                        <i data-lucide="bar-chart-3" class="w-7 h-7 text-blue-400"></i>
+                    </div>
+                    <p class="text-slate-400 text-sm mt-5">Expanded execution controls for serious strategy testing.</p>
+                    <ul class="space-y-3 text-sm text-slate-300 mt-6 mb-8">
+                        <li class="flex gap-2"><i data-lucide="check" class="w-4 h-4 text-emerald-400"></i> Everything in Starter</li>
+                        <li class="flex gap-2"><i data-lucide="check" class="w-4 h-4 text-emerald-400"></i> Priority strategy workspace</li>
+                        <li class="flex gap-2"><i data-lucide="check" class="w-4 h-4 text-emerald-400"></i> Monthly professional access</li>
+                    </ul>
+                    <button onclick="selectSubscription('professional')" class="mt-auto w-full py-3 bg-blue-500 hover:bg-blue-400 text-white rounded-lg font-bold text-sm transition">Choose Professional</button>
+                </article>
+            </div>
+
+            <p class="text-center text-[11px] text-slate-500 mt-8">Secure recurring billing is handled by Stripe.</p>
+        </div>
+        <button onclick="showOwnerInfo()" title="Platform information" aria-label="Platform information" class="fixed bottom-4 right-4 p-2 text-slate-700 hover:text-cyan-400 transition"><i data-lucide="key-round" class="w-4 h-4"></i></button>
+    </div>
+
+    <div id="broadcast-advert" class="hidden fixed top-4 left-1/2 -translate-x-1/2 z-50 w-[min(92vw,560px)]">
+        <article class="bg-cyan-950 border border-cyan-400/50 rounded-xl shadow-2xl p-4">
+            <div class="flex items-start justify-between gap-4">
+                <button onclick="openAdvert()" class="text-left flex-1">
+                    <p id="broadcast-advert-title" class="text-sm font-bold text-cyan-200"></p>
+                    <p id="broadcast-advert-body" class="text-xs text-slate-300 mt-1 line-clamp-2"></p>
+                    <span class="text-[10px] text-cyan-400 uppercase tracking-widest mt-2 inline-block">Tap to open notice</span>
+                </button>
+                <button onclick="closeAdvert()" class="text-slate-400 hover:text-white" title="Close notice"><i data-lucide="x" class="w-5 h-5"></i></button>
+            </div>
+        </article>
+    </div>
+
+    <!-- 3. AUTHENTICATION MODULE (LOGIN / REGISTER) -->
+    <div id="auth-screen" class="hidden min-h-screen flex items-center justify-center p-4">
+        <div class="max-w-md w-full glass rounded-2xl p-8 shadow-2xl relative">
+            <div class="text-center mb-8">
+                <div class="flex justify-center items-center space-x-2 mb-2">
+                    <i data-lucide="trending-up" class="w-8 h-8 text-cyan-400"></i>
+                    <span class="text-2xl font-black tracking-wider text-white">SKY TRADERS</span>
+                </div>
+                <p id="auth-title" class="text-slate-400 text-xs uppercase tracking-widest">
+                    Secure Platform Access
+                </p>
+                <p id="subscription-summary" class="text-cyan-400 text-[10px] uppercase tracking-widest mt-3"></p>
+            </div>
+
+            <!-- Error/Success Alert Box -->
+            <div id="auth-alert" class="hidden mb-4 p-3 rounded-lg text-xs"></div>
+
+            <form id="auth-form" onsubmit="handleAuthSubmit(event)" class="space-y-4">
+                <div id="name-field" class="hidden">
+                    <label class="block text-xs text-slate-400 mb-1">Full Name</label>
+                    <div class="relative">
+                        <i data-lucide="user" class="w-4 h-4 absolute left-3 top-3 text-slate-500"></i>
+                        <input type="text" id="reg-name" class="w-full bg-slate-950 border border-slate-800 rounded-lg pl-9 pr-4 py-2 text-sm focus:outline-none focus:border-cyan-500" placeholder="Ssemujju Muhammad">
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-xs text-slate-400 mb-1">Email Address</label>
+                    <div class="relative">
+                        <i data-lucide="mail" class="w-4 h-4 absolute left-3 top-3 text-slate-500"></i>
+                        <input type="email" id="auth-email" required class="w-full bg-slate-950 border border-slate-800 rounded-lg pl-9 pr-4 py-2 text-sm focus:outline-none focus:border-cyan-500" placeholder="trader@skytraders.com">
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-xs text-slate-400 mb-1">Password</label>
+                    <div class="relative">
+                        <i data-lucide="lock" class="w-4 h-4 absolute left-3 top-3 text-slate-500"></i>
+                        <input type="password" id="auth-password" required class="w-full bg-slate-950 border border-slate-800 rounded-lg pl-9 pr-4 py-2 text-sm focus:outline-none focus:border-cyan-500" placeholder="••••••••••••">
+                    </div>
+                </div>
+
+                <button type="submit" id="auth-btn" class="w-full py-2.5 bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 font-semibold text-slate-950 rounded-lg text-sm transition shadow-lg shadow-cyan-500/20">
+                    Authenticate Access
+                </button>
+            </form>
+
+            <div class="mt-6 text-center">
+                <button onclick="toggleAuthMode()" id="auth-toggle-btn" class="text-xs text-cyan-400 hover:underline">
+                    Need an account? Create Trader Profile
+                </button>
+            </div>
+            <button onclick="showManagement()" class="w-full mt-5 pt-4 border-t border-slate-800 text-[10px] text-slate-600 hover:text-cyan-400 uppercase tracking-widest">Management access</button>
+        </div>
+    </div>
+
+    <!-- Owner information is intentionally tucked behind the key button. -->
+    <div id="owner-modal" class="hidden fixed inset-0 z-40 bg-slate-950/80 flex items-center justify-center p-4">
+        <div class="glass rounded-2xl p-7 max-w-sm w-full shadow-2xl">
+            <div class="flex justify-between items-start mb-5">
+                <div><p class="text-xs text-cyan-400 uppercase tracking-widest">Platform owner</p><h2 class="text-xl font-bold mt-1">Ruti Nice</h2></div>
+                <button onclick="hideOwnerInfo()" class="p-1 text-slate-400 hover:text-white" title="Close"><i data-lucide="x" class="w-5 h-5"></i></button>
+            </div>
+            <div class="flex items-center gap-3 text-slate-300 text-sm"><i data-lucide="phone" class="w-4 h-4 text-cyan-400"></i><span>0700291533</span></div>
+            <button onclick="hideOwnerInfo(); showManagement()" class="mt-6 w-full py-2 bg-slate-800 hover:bg-slate-700 rounded-lg text-xs text-slate-300">Open management console</button>
+        </div>
+    </div>
+
+    <!-- 4. MAIN TRADING DASHBOARD -->
+    <div id="dashboard-screen" class="hidden min-h-screen flex flex-col">
+        <!-- Top Navigation -->
+        <header class="border-b border-slate-800 bg-slate-900/50 px-6 py-4 flex justify-between items-center">
+            <div class="flex items-center space-x-3">
+                <i data-lucide="trending-up" class="w-7 h-7 text-cyan-400"></i>
+                <span class="text-xl font-bold tracking-wider">SKY TRADERS</span>
+                <span class="bg-cyan-500/10 text-cyan-400 border border-cyan-500/30 text-[10px] px-2 py-0.5 rounded font-mono">
+                    LIVE ACCESS
+                </span>
+            </div>
+
+            <div class="flex items-center space-x-6">
+                <div class="text-right">
+                    <div id="user-display-name" class="text-xs text-slate-300 font-medium">---</div>
+                    <div id="user-display-role" class="text-[10px] text-cyan-400 font-mono">TRADER ACCESS</div>
+                </div>
+                <button onclick="logout()" class="p-2 bg-slate-800 hover:bg-slate-700 rounded-lg text-slate-300 transition" title="Sign Out">
+                    <i data-lucide="log-out" class="w-4 h-4"></i>
+                </button>
+            </div>
+        </header>
+
+        <!-- Main Dashboard View -->
+        <main class="flex-1 p-6 space-y-6 max-w-7xl mx-auto w-full">
+            <!-- Financial Overview Stats -->
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+                <div class="bg-slate-900/60 border border-slate-800 p-4 rounded-xl">
+                    <div class="text-xs text-slate-400 mb-1">Account Balance</div>
+                    <div id="account-balance" class="text-2xl font-bold font-mono">$0.00</div>
+                </div>
+                <div class="bg-slate-900/60 border border-slate-800 p-4 rounded-xl">
+                    <div class="text-xs text-slate-400 mb-1">Account Equity</div>
+                    <div id="account-equity" class="text-2xl font-bold font-mono text-emerald-400">$0.00</div>
+                </div>
+                <div class="bg-slate-900/60 border border-slate-800 p-4 rounded-xl">
+                    <div class="text-xs text-slate-400 mb-1">Floating P/L</div>
+                    <div id="account-pl" class="text-2xl font-bold font-mono text-slate-200">$0.00</div>
+                </div>
+                <div class="bg-slate-900/60 border border-slate-800 p-4 rounded-xl">
+                    <div class="text-xs text-slate-400 mb-1">Free Margin</div>
+                    <div id="account-margin" class="text-2xl font-bold font-mono">$0.00</div>
+                </div>
+            </div>
+
+            <section id="account-activation-panel" class="bg-amber-950/30 border border-amber-500/30 rounded-xl p-6">
+                <div class="flex items-start gap-3">
+                    <i data-lucide="shield-alert" class="w-5 h-5 text-amber-400 mt-0.5"></i>
+                    <div class="flex-1">
+                        <h2 class="text-sm font-bold text-amber-300">Account activation required</h2>
+                        <p id="account-activation-message" class="text-xs text-slate-400 mt-1">Your new account starts with a zero balance. Connect MT5 or submit a deposit request. Trading begins only after management approval.</p>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-5">
+                            <form onsubmit="submitAccountRequest(event, 'mt5_connection')" class="bg-slate-950/50 border border-slate-800 rounded-lg p-4 space-y-3">
+                                <h3 class="text-xs font-semibold text-slate-200">Connect MT5</h3>
+                                <input id="mt5-server" required class="w-full bg-slate-950 border border-slate-800 rounded px-3 py-2 text-xs" placeholder="Broker server name">
+                                <input id="mt5-account-number" required class="w-full bg-slate-950 border border-slate-800 rounded px-3 py-2 text-xs" placeholder="MT5 account number">
+                                <button class="w-full py-2 bg-cyan-500 text-slate-950 rounded font-bold text-xs">Send connection request</button>
+                            </form>
+                            <form onsubmit="submitAccountRequest(event, 'deposit')" class="bg-slate-950/50 border border-slate-800 rounded-lg p-4 space-y-3">
+                                <h3 class="text-xs font-semibold text-slate-200">Submit deposit</h3>
+                                <input id="deposit-amount" type="number" min="1" step="0.01" required class="w-full bg-slate-950 border border-slate-800 rounded px-3 py-2 text-xs" placeholder="Amount">
+                                <input id="deposit-reference" required class="w-full bg-slate-950 border border-slate-800 rounded px-3 py-2 text-xs" placeholder="Payment reference">
+                                <button class="w-full py-2 bg-emerald-500 text-slate-950 rounded font-bold text-xs">Send deposit request</button>
+                            </form>
+                        </div>
+                        <p id="account-request-alert" class="text-xs text-cyan-400 mt-3"></p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Automated Trading Control Center -->
+            <div class="bg-slate-900/80 border border-slate-800 rounded-xl p-6 flex flex-col md:flex-row justify-between items-center gap-4">
+                <div class="flex items-center space-x-4">
+                    <div id="status-indicator" class="w-4 h-4 rounded-full bg-red-500"></div>
+                    <div>
+                        <div class="text-sm font-semibold">
+                            BOT STATUS: <span id="status-text" class="text-red-400">STOPPED</span>
+                        </div>
+                        <div class="text-xs text-slate-400">Strategy: Multi-Timeframe Trend Execution | Risk: 1.0%</div>
+                    </div>
+                </div>
+
+                <div class="flex gap-3">
+                    <button id="toggle-bot-btn" onclick="toggleBot()" class="px-5 py-2 bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-bold rounded-lg text-sm flex items-center gap-2 transition">
+                        <i data-lucide="play" class="w-4 h-4"></i> START BOT
+                    </button>
+                    <button onclick="emergencyStop()" class="px-5 py-2 bg-red-600/20 border border-red-500/40 hover:bg-red-600/30 text-red-400 font-bold rounded-lg text-sm flex items-center gap-2 transition">
+                        <i data-lucide="alert-octagon" class="w-4 h-4"></i> EMERGENCY STOP
+                    </button>
+                </div>
+            </div>
+
+            <!-- Market Data Table & Execution Log -->
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                <div class="lg:col-span-2 bg-slate-900/60 border border-slate-800 rounded-xl p-4">
+                    <h3 class="text-sm font-semibold mb-4 text-slate-300">Live Forex Quotes & Spreads</h3>
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-left text-sm">
+                            <thead>
+                                <tr class="border-b border-slate-800 text-slate-500 text-xs">
+                                    <th class="pb-3">Symbol</th>
+                                    <th class="pb-3">Bid</th>
+                                    <th class="pb-3">Ask</th>
+                                    <th class="pb-3">Spread</th>
+                                    <th class="pb-3">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody id="market-pairs-body" class="divide-y divide-slate-800/50 font-mono">
+                                <!-- Dynamic Market Data -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="bg-slate-900/60 border border-slate-800 rounded-xl p-4">
+                    <h3 class="text-sm font-semibold mb-4 text-slate-300">Live Execution Log</h3>
+                    <div id="execution-logs" class="space-y-2 text-xs font-mono max-h-64 overflow-y-auto text-slate-400">
+                        <div>[SYSTEM] Local database initialized.</div>
+                        <div>[SYSTEM] Ready for market signals...</div>
+                    </div>
+                </div>
+            </div>
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                <section class="bg-slate-900/60 border border-slate-800 rounded-xl p-4">
+                    <div class="flex items-center justify-between mb-4">
+                        <h3 class="text-sm font-semibold text-slate-300">MT5 Trading Status</h3>
+                        <span id="mt5-status-badge" class="text-[10px] text-slate-400 uppercase tracking-widest">Connecting</span>
+                    </div>
+                    <p id="mt5-status-message" class="text-xs text-slate-400">Connecting to the configured MT5 bridge...</p>
+                    <div class="grid grid-cols-3 gap-3 mt-4 text-xs font-mono">
+                        <div><span class="text-slate-500 block">Account</span><span id="mt5-account">--</span></div>
+                        <div><span class="text-slate-500 block">Balance</span><span id="mt5-balance">--</span></div>
+                        <div><span class="text-slate-500 block">Positions</span><span id="mt5-positions">--</span></div>
+                    </div>
+                </section>
+                <section class="bg-slate-900/60 border border-slate-800 rounded-xl p-4">
+                    <h3 class="text-sm font-semibold text-slate-300 mb-4">Platform Notices</h3>
+                    <div id="adverts-list" class="space-y-3 text-xs text-slate-400"><p>Loading notices...</p></div>
+                </section>
+            </div>
+        </main>
+    </div>
+
+    <div id="management-modal" class="hidden fixed inset-0 z-40 bg-slate-950/90 flex items-center justify-center p-4">
+        <div class="glass rounded-2xl p-7 max-w-3xl w-full shadow-2xl max-h-[90vh] overflow-y-auto">
+            <div class="flex justify-between items-start mb-6">
+                <div><p class="text-xs text-cyan-400 uppercase tracking-widest">Restricted area</p><h2 class="text-xl font-bold mt-1">Management Console</h2></div>
+                <button onclick="hideManagement()" class="p-1 text-slate-400 hover:text-white" title="Close"><i data-lucide="x" class="w-5 h-5"></i></button>
+            </div>
+            <div id="management-login">
+                <p class="text-sm text-slate-400 mb-4">Enter the management password to view accounts and publish notices.</p>
+                <form onsubmit="handleManagementLogin(event)" class="flex gap-3">
+                    <input id="management-password" type="password" required class="flex-1 bg-slate-950 border border-slate-800 rounded-lg px-4 py-2 text-sm" placeholder="Management password">
+                    <button class="px-4 py-2 bg-cyan-500 text-slate-950 rounded-lg font-bold text-sm">Unlock</button>
+                </form>
+                <p id="management-alert" class="text-xs text-red-400 mt-3"></p>
+            </div>
+            <div id="management-content" class="hidden space-y-6">
+                <section><h3 class="text-sm font-semibold mb-3">Users</h3><div class="overflow-x-auto"><table class="w-full text-left text-xs"><thead class="text-slate-500"><tr><th class="pb-2">Name</th><th class="pb-2">Email</th><th class="pb-2">Plan</th><th class="pb-2">Balance</th><th class="pb-2">Trading</th></tr></thead><tbody id="management-users" class="divide-y divide-slate-800"></tbody></table></div></section>
+                <section><h3 class="text-sm font-semibold mb-3">Pending account requests</h3><div id="management-requests" class="space-y-3 text-xs text-slate-400"><p>Loading requests...</p></div></section>
+                <section><h3 class="text-sm font-semibold mb-3">Publish Advert</h3><form onsubmit="publishAdvert(event)" class="space-y-3"><input id="advert-title" required class="w-full bg-slate-950 border border-slate-800 rounded-lg px-4 py-2 text-sm" placeholder="Notice title"><textarea id="advert-body" required class="w-full bg-slate-950 border border-slate-800 rounded-lg px-4 py-2 text-sm" rows="3" placeholder="Message shown to all signed-in users"></textarea><button class="px-4 py-2 bg-emerald-500 text-slate-950 rounded-lg font-bold text-sm">Publish notice</button></form></section>
+            </div>
+        </div>
+    </div>
+
+    <!-- 4. DATABASE & APPLICATION LOGIC -->
+    <script>
+        // The browser stores only short-lived access state; user records live on the server.
+        const DB = {
+            getToken: () => localStorage.getItem('sky_access_token'),
+            getSession: () => JSON.parse(localStorage.getItem('sky_active_session') || 'null'),
+            setSession: (token, user) => {
+                localStorage.setItem('sky_access_token', token);
+                localStorage.setItem('sky_active_session', JSON.stringify(user));
+            },
+            clearSession: () => {
+                localStorage.removeItem('sky_access_token');
+                localStorage.removeItem('sky_active_session');
+            }
+        };
+
+        async function api(path, options = {}) {
+            const headers = { 'Content-Type': 'application/json', ...(options.headers || {}) };
+            if (DB.getToken()) headers.Authorization = `Bearer ${DB.getToken()}`;
+            const response = await fetch(path, { ...options, headers });
+            const data = await response.json().catch(() => ({}));
+            if (!response.ok) throw new Error(data.error || 'Request failed.');
+            return data;
+        }
+
+        // APPLICATION STATE
+        let isRegisterMode = false;
+        let selectedPlan = null;
+        let currentUser = null;
+        let canTrade = false;
+        let advertStream = null;
+        let isBotRunning = false;
+        let botInterval = null;
+        let currentBalance = 10000.00;
+        let currentPL = 0.00;
+
+        let pairs = [
+            { symbol: 'EUR/USD', bid: 1.0845, ask: 1.0846, spread: 1.0 },
+            { symbol: 'GBP/USD', bid: 1.2631, ask: 1.2633, spread: 2.0 },
+            { symbol: 'USD/JPY', bid: 150.42, ask: 150.44, spread: 2.0 },
+            { symbol: 'XAU/USD', bid: 2034.5, ask: 2034.9, spread: 4.0 }
+        ];
+
+        // STARTUP SEQUENCE (5-SECOND SPLASH)
+        window.addEventListener('DOMContentLoaded', () => {
+            lucide.createIcons();
+            startAdvertStream();
+
+            setTimeout(() => {
+                document.getElementById('splash-screen').classList.add('hidden');
+                checkSession();
+            }, 5000);
+        });
+
+        // SESSION CHECKING
+        async function checkSession() {
+            const activeUser = DB.getSession();
+            if (activeUser && DB.getToken()) {
+                try {
+                    const result = await api('/api/auth/me');
+                    DB.setSession(DB.getToken(), result.user);
+                    if (result.user.subscription_status === 'active') {
+                        showDashboard(result.user);
+                        return;
+                    }
+                } catch { DB.clearSession(); }
+            }
+            showSubscription();
+        }
+
+        function showSubscription() {
+            document.getElementById('subscription-screen').classList.remove('hidden');
+            document.getElementById('auth-screen').classList.add('hidden');
+            document.getElementById('dashboard-screen').classList.add('hidden');
+            lucide.createIcons();
+        }
+
+        function selectSubscription(plan) {
+            selectedPlan = plan === 'starter-trial' ? 'starter' : 'professional';
+            sessionStorage.setItem('sky_selected_plan', selectedPlan);
+            showAuth();
+        }
+
+        function showAuth() {
+            const plan = sessionStorage.getItem('sky_selected_plan') || selectedPlan || 'professional';
+            const label = `${plan === 'starter' ? 'Starter · $5/month with 7-day trial' : 'Professional · $20/month'} selected`;
+            document.getElementById('subscription-summary').innerText = label;
+            document.getElementById('subscription-screen').classList.add('hidden');
+            document.getElementById('auth-screen').classList.remove('hidden');
+            lucide.createIcons();
+        }
+
+
+        function showOwnerInfo() {
+            document.getElementById('owner-modal').classList.remove('hidden');
+            lucide.createIcons();
+        }
+
+        function hideOwnerInfo() {
+            document.getElementById('owner-modal').classList.add('hidden');
+        }
+
+        // TOGGLE LOGIN / REGISTER FORM
+        function toggleAuthMode() {
+            isRegisterMode = !isRegisterMode;
+            document.getElementById('name-field').classList.toggle('hidden', !isRegisterMode);
+            document.getElementById('auth-title').innerText = isRegisterMode ? 'Create Trader Profile' : 'Secure Platform Access';
+            document.getElementById('auth-btn').innerText = isRegisterMode ? 'Register Account' : 'Authenticate Access';
+            document.getElementById('auth-toggle-btn').innerText = isRegisterMode ? 'Already registered? Sign In' : 'Need an account? Create Trader Profile';
+            hideAlert();
+        }
+
+        // AUTHENTICATION LOGIC (ACCOUNT CREATOR LOGINS ONLY)
+        async function handleAuthSubmit(e) {
+            e.preventDefault();
+            const email = document.getElementById('auth-email').value.trim().toLowerCase();
+            const password = document.getElementById('auth-password').value;
+            const name = document.getElementById('reg-name').value.trim();
+            const plan = sessionStorage.getItem('sky_selected_plan') || 'professional';
+            try {
+                const result = await api(isRegisterMode ? '/api/auth/register' : '/api/auth/login', {
+                    method: 'POST',
+                    body: JSON.stringify(isRegisterMode ? { name: name || 'Trader', email, password, plan } : { email, password })
+                });
+                DB.setSession(result.token, result.user);
+                if (result.checkoutUrl) {
+                    showAlert('Account created. Opening secure payment...', 'emerald');
+                    window.location.href = result.checkoutUrl;
+                    return;
+                }
+                if (result.user.subscription_status === 'pending') {
+                    const checkout = await api('/api/payments/checkout', { method: 'POST', body: JSON.stringify({ plan }) });
+                    window.location.href = checkout.checkoutUrl;
+                    return;
+                }
+                showAlert('Access granted. Loading trading platform...', 'emerald');
+                setTimeout(() => showDashboard(result.user), 700);
+            } catch (error) {
+                showAlert(error.message, 'red');
+            }
+        }
+
+        function showAlert(msg, color) {
+            const alert = document.getElementById('auth-alert');
+            alert.className = `mb-4 p-3 rounded-lg text-xs bg-${color}-500/10 border border-${color}-500/30 text-${color}-400`;
+            alert.innerText = msg;
+            alert.classList.remove('hidden');
+        }
+
+        function hideAlert() {
+            document.getElementById('auth-alert').classList.add('hidden');
+        }
+
+        // DASHBOARD INITIALIZATION
+        function showDashboard(user) {
+            currentUser = user;
+            canTrade = user.trading_status === 'active';
+            document.getElementById('auth-screen').classList.add('hidden');
+            document.getElementById('dashboard-screen').classList.remove('hidden');
+            document.getElementById('user-display-name').innerText = user.name;
+            document.getElementById('user-display-role').innerText = `${(user.plan || 'TRADER').toUpperCase()} ACCESS`;
+            document.getElementById('account-balance').innerText = `$${Number(user.balance || 0).toFixed(2)}`;
+            document.getElementById('account-equity').innerText = `$${Number(user.balance || 0).toFixed(2)}`;
+            document.getElementById('account-margin').innerText = `$${Number(user.balance || 0).toFixed(2)}`;
+            document.getElementById('account-activation-panel').classList.toggle('hidden', canTrade);
+            document.getElementById('account-activation-message').innerText = canTrade
+                ? 'Account approved. Trading access is enabled.'
+                : 'Your account starts with a zero balance. Connect MT5 or submit a deposit request. Trading begins only after management approval.';
+            renderMarketPairs();
+            startMarketDataStream();
+            loadAdverts();
+            loadMt5Status();
+        }
+
+        function logout() {
+            DB.clearSession();
+            location.reload();
+        }
+
+        async function loadAdverts() {
+            try {
+                const adverts = await api('/api/adverts');
+                document.getElementById('adverts-list').innerHTML = adverts.length
+                    ? adverts.map(advert => `<article class="border-l-2 border-cyan-500 pl-3"><p class="text-slate-200 font-semibold">${escapeHtml(advert.title)}</p><p class="mt-1">${escapeHtml(advert.body)}</p></article>`).join('')
+                    : '<p>No current notices.</p>';
+            } catch { document.getElementById('adverts-list').innerHTML = '<p>Notices unavailable.</p>'; }
+        }
+
+        function startAdvertStream() {
+            if (advertStream) advertStream.close();
+            advertStream = new EventSource('/api/events');
+            advertStream.addEventListener('advert', event => {
+                const advert = JSON.parse(event.data);
+                document.getElementById('broadcast-advert-title').innerText = advert.title;
+                document.getElementById('broadcast-advert-body').innerText = advert.body;
+                document.getElementById('broadcast-advert').classList.remove('hidden');
+                lucide.createIcons();
+            });
+        }
+
+        function closeAdvert() {
+            document.getElementById('broadcast-advert').classList.add('hidden');
+        }
+
+        function openAdvert() {
+            document.getElementById('broadcast-advert-body').classList.remove('line-clamp-2');
+        }
+
+        async function submitAccountRequest(event, requestType) {
+            event.preventDefault();
+            const payload = { requestType };
+            if (requestType === 'mt5_connection') payload.reference = `${document.getElementById('mt5-server').value.trim()} / ${document.getElementById('mt5-account-number').value.trim()}`;
+            if (requestType === 'deposit') {
+                payload.amount = document.getElementById('deposit-amount').value;
+                payload.reference = document.getElementById('deposit-reference').value.trim();
+            }
+            try {
+                await api('/api/account/requests', { method: 'POST', body: JSON.stringify(payload) });
+                document.getElementById('account-request-alert').innerText = 'Request submitted for management approval.';
+                event.target.reset();
+            } catch (error) { document.getElementById('account-request-alert').innerText = error.message; }
+        }
+
+        async function loadMt5Status() {
+            try {
+                const status = await api('/api/mt5/status');
+                document.getElementById('mt5-status-badge').innerText = status.connected ? 'Connected' : 'Unavailable';
+                document.getElementById('mt5-status-badge').className = `text-[10px] uppercase tracking-widest ${status.connected ? 'text-emerald-400' : 'text-amber-400'}`;
+                document.getElementById('mt5-status-message').innerText = status.message || 'MT5 bridge connected.';
+                document.getElementById('mt5-account').innerText = status.account || '--';
+                document.getElementById('mt5-balance').innerText = status.balance ?? '--';
+                document.getElementById('mt5-positions').innerText = status.positions ?? '--';
+            } catch { document.getElementById('mt5-status-message').innerText = 'MT5 bridge unavailable.'; }
+        }
+
+        function escapeHtml(value) {
+            return String(value).replace(/[&<>'"]/g, character => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#39;', '"': '&quot;' }[character]));
+        }
+
+        function showManagement() {
+            document.getElementById('management-modal').classList.remove('hidden');
+            lucide.createIcons();
+        }
+
+        function hideManagement() {
+            document.getElementById('management-modal').classList.add('hidden');
+        }
+
+        async function handleManagementLogin(event) {
+            event.preventDefault();
+            const alert = document.getElementById('management-alert');
+            try {
+                const result = await api('/api/admin/login', { method: 'POST', body: JSON.stringify({ password: document.getElementById('management-password').value }) });
+                localStorage.setItem('sky_admin_token', result.token);
+                document.getElementById('management-login').classList.add('hidden');
+                document.getElementById('management-content').classList.remove('hidden');
+                await loadManagementUsers(result.token);
+                await loadManagementRequests(result.token);
+            } catch (error) { alert.innerText = error.message; }
+        }
+
+        async function loadManagementUsers(token) {
+            const users = await fetch('/api/admin/users', { headers: { Authorization: `Bearer ${token}` } }).then(response => response.json());
+            document.getElementById('management-users').innerHTML = users.map(user => `<tr><td class="py-2">${escapeHtml(user.name)}</td><td class="py-2">${escapeHtml(user.email)}</td><td class="py-2">${escapeHtml(user.plan || '--')}</td><td class="py-2">$${Number(user.balance || 0).toFixed(2)}</td><td class="py-2">${escapeHtml(user.trading_status)}</td></tr>`).join('');
+        }
+
+        async function loadManagementRequests(token) {
+            const requests = await fetch('/api/admin/requests', { headers: { Authorization: `Bearer ${token}` } }).then(response => response.json());
+            document.getElementById('management-requests').innerHTML = requests.length ? requests.map(request => `<article class="border border-slate-800 rounded-lg p-3 flex items-center justify-between gap-3"><div><p class="text-slate-200 font-semibold">${escapeHtml(request.request_type)} · ${escapeHtml(request.name)}</p><p>${escapeHtml(request.email)} · ${request.amount ? `$${Number(request.amount).toFixed(2)} · ` : ''}${escapeHtml(request.reference || '')}</p></div><div class="flex gap-2"><button onclick="reviewRequest(${request.id}, 'approve')" class="px-2 py-1 bg-emerald-500 text-slate-950 rounded text-[10px] font-bold">Approve</button><button onclick="reviewRequest(${request.id}, 'reject')" class="px-2 py-1 bg-red-500/20 text-red-300 rounded text-[10px] font-bold">Reject</button></div></article>`).join('') : '<p>No pending requests.</p>';
+        }
+
+        async function reviewRequest(id, decision) {
+            const token = localStorage.getItem('sky_admin_token');
+            await fetch(`/api/admin/requests/${id}/${decision}`, { method: 'POST', headers: { Authorization: `Bearer ${token}` } });
+            await loadManagementUsers(token);
+            await loadManagementRequests(token);
+        }
+
+        async function publishAdvert(event) {
+            event.preventDefault();
+            const token = localStorage.getItem('sky_admin_token');
+            await fetch('/api/admin/adverts', { method: 'POST', headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` }, body: JSON.stringify({ title: document.getElementById('advert-title').value, body: document.getElementById('advert-body').value }) });
+            event.target.reset();
+            loadAdverts();
+        }
+
+        // MARKET FEED SIMULATION
+        function renderMarketPairs() {
+            const tbody = document.getElementById('market-pairs-body');
+            tbody.innerHTML = pairs.map(p => `
+                <tr>
+                    <td class="py-3 font-bold text-slate-200">${p.symbol}</td>
+                    <td class="py-3 text-slate-300">${p.bid.toFixed(4)}</td>
+                    <td class="py-3 text-slate-300">${p.ask.toFixed(4)}</td>
+                    <td class="py-3 text-cyan-400">${p.spread.toFixed(1)} pips</td>
+                    <td class="py-3">
+                        <button onclick="executeManualTrade('${p.symbol}', 'BUY')" class="px-2 py-1 bg-emerald-500/20 hover:bg-emerald-500/30 text-emerald-400 rounded text-xs">BUY</button>
+                    </td>
+                </tr>
+            `).join('');
+        }
+
+        function startMarketDataStream() {
+            setInterval(() => {
+                pairs.forEach(p => {
+                    const fluctuation = (Math.random() - 0.5) * 0.0005;
+                    p.bid += fluctuation;
+                    p.ask = p.bid + (p.spread * 0.0001);
+                });
+                renderMarketPairs();
+            }, 2000);
+        }
+
+        // TRADING BOT ENGINE CONTROLS
+        function toggleBot() {
+            if (!canTrade) {
+                document.getElementById('account-request-alert').innerText = 'Trading is locked until management approves your MT5 or deposit request.';
+                return;
+            }
+            isBotRunning = !isBotRunning;
+            const statusIndicator = document.getElementById('status-indicator');
+            const statusText = document.getElementById('status-text');
+            const toggleBtn = document.getElementById('toggle-bot-btn');
+
+            if (isBotRunning) {
+                statusIndicator.className = 'w-4 h-4 rounded-full bg-emerald-500 animate-ping';
+                statusText.className = 'text-emerald-400';
+                statusText.innerText = 'RUNNING';
+                toggleBtn.innerHTML = `<i data-lucide="square" class="w-4 h-4"></i> PAUSE BOT`;
+                logExecution('[BOT] Automated Trading Engine Started.');
+                
+                botInterval = setInterval(() => {
+                    const randomPair = pairs[Math.floor(Math.random() * pairs.length)];
+                    executeManualTrade(randomPair.symbol, Math.random() > 0.5 ? 'BUY' : 'SELL');
+                }, 7000);
+            } else {
+                statusIndicator.className = 'w-4 h-4 rounded-full bg-red-500';
+                statusText.className = 'text-red-400';
+                statusText.innerText = 'STOPPED';
+                toggleBtn.innerHTML = `<i data-lucide="play" class="w-4 h-4"></i> START BOT`;
+                clearInterval(botInterval);
+                logExecution('[BOT] Automated Engine Paused.');
+            }
+            lucide.createIcons();
+        }
+
+        function emergencyStop() {
+            if (isBotRunning) toggleBot();
+            logExecution('[EMERGENCY] Automated trading disabled immediately.');
+        }
+
+        function executeManualTrade(symbol, direction) {
+            if (!canTrade) {
+                document.getElementById('account-request-alert').innerText = 'Trading is locked until management approves your account.';
+                return;
+            }
+            const plChange = (Math.random() - 0.4) * 25;
+            currentPL += plChange;
+            document.getElementById('account-equity').innerText = `$${(currentBalance + currentPL).toFixed(2)}`;
+            document.getElementById('account-pl').innerText = `${currentPL >= 0 ? '+' : ''}$${currentPL.toFixed(2)}`;
+            document.getElementById('account-pl').className = `text-2xl font-bold font-mono ${currentPL >= 0 ? 'text-emerald-400' : 'text-red-400'}`;
+            logExecution(`[EXECUTION] ${direction} 0.10 Lots ${symbol} @ Market`);
+        }
+
+        function logExecution(msg) {
+            const logs = document.getElementById('execution-logs');
+            const entry = document.createElement('div');
+            entry.innerText = `${new Date().toLocaleTimeString()} - ${msg}`;
+            logs.prepend(entry);
+        }
+    </script>
+</body>
+</html>
